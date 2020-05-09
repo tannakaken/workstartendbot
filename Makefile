@@ -1,8 +1,8 @@
 all:
 	docker build -t workstartendbot .
 
-run:
-	docker run -v "$PWD":/var/task workstartendbot
+zip:
+	docker run -v "${PWD}/build":/var/task/build workstartendbot
 
 clean:
-  
+	rm -rf build

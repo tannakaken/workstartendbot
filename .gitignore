@@ -1,3 +1,5 @@
 venv
 __pychache__
+build
 deploy_package.zip
+.DS_Store

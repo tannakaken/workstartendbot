@@ -19,24 +19,24 @@ def lambda_handler(event, context):
     dt_now = datetime.datetime.now()
     work_end = dt_now.hour > 18
     if work_end:
-        message = "皆さんお疲れ様です。\ntoggleとzoomとマネーフォワードを切ることを忘れないようにしてください。"
+        message = "皆さん、お疲れ様です。\ntoggleとマネーフォワードの操作を忘れないようにしてください。"
     else:
-        message = "皆さんおはようございます。\ntoggleとzoomとマネーフォワードを忘れないようにしてください。"
+        message = "皆さん、おはようございます。\ntoggleとzoomとマネーフォワードを忘れないようにしてください。"
     if 'holiday' == requests.get(check_holiday_url).text:
         print('holiday')
         return 'holiday'
+    if 'monthend' == requests.get(check_month_end_url).text:
+        if work_end:
+            message = message + "\n月末ですのでマネーフォワードの記録を確認しましたね。"
+        else:    
+            message = message + "\n月末ですのでマネーフォワードの記録を確認しておきましょう。"
     if 'weekstart' == requests.get(check_week_start_url).text:
         message = message + "\n今週もがんばりましょう。"
     elif 'weekend' == requests.get(check_week_end_url).text:
         if work_end:
-            message = message + "\n良い週末を！。"
+            message = message + "\n良い週末を！"
         else:
-            message = message + "\n今週もあと1日です。がんばりましょう。"
-    if 'monthend' == requests.get(check_month_end_url).text:
-        if work_end:
-            message = message + "\n月末ですのでmoneyforwardが提出可能か確認しましたね。"
-        else:    
-            message = message + "\n月末ですのでmoneyforwardを提出可能にしておきましょう"
+            message = message + "\n今週もあと1日です。がんばりましょう！"
     print(message)
     response = room.send_message(message, toall=True)
     return {'status': response.status}

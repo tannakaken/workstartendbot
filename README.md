@@ -53,6 +53,7 @@ make zip
 でbuildフォルダにdeploy\_package.zipという名前のファイルができるのでそれを、
 アップロードすれば良い。
 
-## 作者
+# Author
+淡中☆圏 \<tannakaken@gmail.com\>
 
-淡中 圏論 <tannakaken@gmail.com>
+Twitter: @tannakaken
